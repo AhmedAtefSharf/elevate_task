@@ -13,116 +13,131 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(width: 2, color: AppColors.lightBlue),
-                borderRadius: BorderRadius.circular(15.r),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: Colors.grey[300]!,
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 180.h,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
+                  child: CachedNetworkImage(
+                    imageUrl: product.image ?? "",
+                    placeholder: (context, url) => LoadingWidget(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                top: 8.h,
+                right: 8.w,
+                child: Container(
+                  height: 35.h,
+                  width: 35.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.favorite_border),
+                    color: Colors.black54,
+                    iconSize: 18.sp,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
+                Text(
+                  product.title ?? "No Title",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  product.description ?? "",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.grey[600],
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 8.h),
+                Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: product.image??"", // Using thumbnail as the main image
-                      placeholder: (context, url) => LoadingWidget(),
-                      errorWidget: (context, url, error) =>  Icon(Icons.error),
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      height: 128.h,
+                    Text(
+                      'EGP ${product.price?.toStringAsFixed(2) ?? "0.00"}',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    Positioned(
-                      top: 3.h,
-                      right: 3.w,
-                      child: InkWell(
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: ShapeDecoration(
-                            color: AppColors.whiteColor,
-                            shape: const OvalBorder(),
-                          ),
-                          child: Center(
-                            child: ImageIcon(
-                              AssetImage(AppAssets.iconFav),color: AppColors.primaryColor,
-                            ),
-                          ),
+                    SizedBox(width: 8.w),
+                    if (product.price != null)
+                      Text(
+                        'EGP ${(product.price! * 1.5).toStringAsFixed(2)}',
+                        style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          fontSize: 12.sp,
+                          color: Colors.grey,
                         ),
                       ),
-                    )
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 5,),
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: 100,maxHeight: 30
-                          ),
-                          child: Text(product.title??"",
-
-                            style: TextStyle(fontSize: 14,color: AppColors.primaryColor),),
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'EGP ${product.price}',
-                              style: TextStyle(fontSize: 14),
-                            ),
-                            const SizedBox(width: 16,),
-                            Text(
-                                '${product.price}',
-                                style:TextStyle(decoration: TextDecoration.lineThrough,fontSize: 12,color: Color(0xff004182) )
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(height: 5,),
-                            Text(
-                              "Review(${product.rating})",style: TextStyle(fontSize: 14),
-                            ),
-                            SizedBox(width: 3,),
-                            Image.asset(
-                              AppAssets.iconStar,
-                              height: 15.h,
-                              width: 15.w,
-                            ),
-                            const Spacer(
-                              flex: 4,
-                            ),
-                            ImageIcon(
-                              const AssetImage(AppAssets.iconAdd),
-                              size: 33.sp,
-                              color: AppColors.primaryColor,
-                            ),
-                            const Spacer(),
-                          ],
-                        ),
-                      ]),
-                )
+                SizedBox(height: 8.h),
+                Row(
+                  children: [
+                    Text(
+                      "Review (${product.rating?.rate?.toStringAsFixed(1) ?? "0.0"})",
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 16.sp,
+                    ),
+                  ],
+                ),
               ],
             ),
-
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
-

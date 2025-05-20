@@ -14,14 +14,17 @@ class ProductRepoimpl implements ProductRepo {
   Future<Either<Failure, List<Product>>> fetchProducts() async {
     try {
       var data = await apiService.get(url: ApiConstance.apiUrl);
-      List<Product> products =[];
-      for(var item in data['products']){
+      List<Product> products = [];
+
+      for (var item in data) {
         products.add(Product.fromJson(item));
       }
+
+      return Right(products);
+
       return Right(products);
     } on Exception catch (e) {
-     return Left(ServerFailure(e.toString()));
+      return Left(ServerFailure(e.toString()));
     }
-
   }
 }

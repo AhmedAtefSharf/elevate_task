@@ -7,9 +7,9 @@ class ApiService {
 
   ApiService(this._dio);
 
+   Future<dynamic> get({required String url}) async {
+     final response = await _dio.get(url);
+     return response.data;
+   }
 
-  Future<Map<String, dynamic>> get({required String url}) async {
-    var response = await _dio.get(url);
-    return response.data;
-  }
 }
