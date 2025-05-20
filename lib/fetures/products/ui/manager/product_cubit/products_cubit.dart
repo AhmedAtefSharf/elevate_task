@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:task1_rout/fetures/products/data/models/product.dart';
-import 'package:task1_rout/fetures/products/data/repos/product_repo.dart';
+import 'package:elevate_task/fetures/products/data/models/product.dart';
+import 'package:elevate_task/fetures/products/data/repos/product_repo.dart';
 
 part 'products_state.dart';
 

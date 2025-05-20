@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task1_rout/fetures/products/ui/view/widgets/loading_widget.dart';
+import 'package:elevate_task/fetures/products/ui/view/widgets/loading_widget.dart';
 import '../../../../core/utilis/app_assets.dart';
-import '../../../../core/utilis/app_color.dart';
+
 import '../../data/models/product.dart';
 
 class ProductWidget extends StatelessWidget {
@@ -14,13 +14,15 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
+      height: 800,
       margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
-          color: Colors.grey[300]!,
-          width: 1,
+          color: Colors.blue,
+          width: 1.w,
         ),
       ),
       child: Column(
@@ -29,15 +31,18 @@ class ProductWidget extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 180.h,
+                height: 120.h,
                 width: double.infinity,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(12.r)),
                   child: CachedNetworkImage(
+                    height: 120.h,
                     imageUrl: product.image ?? "",
                     placeholder: (context, url) => LoadingWidget(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    fit: BoxFit.contain,
+                    errorWidget: (context, url, error) =>
+                        Icon(Icons.error, size: 20.sp),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -53,8 +58,8 @@ class ProductWidget extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
-                        blurRadius: 4,
-                        spreadRadius: 1,
+                        blurRadius: 4.r,
+                        spreadRadius: 1.r,
                       ),
                     ],
                   ),
@@ -83,53 +88,60 @@ class ProductWidget extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4.h),
-                Text(
-                  product.description ?? "",
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.grey[600],
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
                 SizedBox(height: 8.h),
                 Row(
                   children: [
-                    Text(
-                      'EGP ${product.price?.toStringAsFixed(2) ?? "0.00"}',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: 8.w),
-                    if (product.price != null)
-                      Text(
-                        'EGP ${(product.price! * 1.5).toStringAsFixed(2)}',
-                        style: TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 12.sp,
-                          color: Colors.grey,
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'EGP ${product.price?.toInt() ?? 0}',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            if (product.price != null)
+                              Text(
+                                'EGP ${(product.price! * 1.5).toInt()}',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 14.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                          ],
                         ),
-                      ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Text(
-                      "Review (${product.rating?.rate?.toStringAsFixed(1) ?? "0.0"})",
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                      size: 16.sp,
+                        SizedBox(height: 8.h),
+                        Row(
+                          children: [
+                            Text(
+                              "Review (${product.rating?.rate?.toStringAsFixed(1) ?? "0.0"})",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            SizedBox(width: 4.w),
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 16,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Image.asset(
+                              AppAssets.iconAdd,
+                              width: 20,
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -13,18 +13,36 @@
 ## Directory Structure
 <details>
      <summary> Click to expand </summary>
-lib
-├── bloc
-│   ├── home_cubit.dart
-│   └── home_state.dart
-├── models
-│   └── card_model.dart
-│       
-├── screens
-│   └── home_screen.dart
-│ 
-│── widget
-│     └── card_item  
+project/
+├── lib/
+│   ├── core/
+│   │   ├── errors/
+│   │   ├── utils/
+│   │   ├── service_locator/
+│   │   │   └── service_locator.dart
+│   │   ├── api_constance.dart
+│   │   ├── app_assets.dart
+│   │   └── app_color.dart
+│   └── features/
+│       └── products/
+│           ├── data/
+│           │   ├── models/
+│           │   ├── repos/
+│           │   │   ├── product_repo.dart
+│           │   │   └── product_repo_impl.dart
+│           │   └── services/
+│           │       └── api_service.dart
+│           └── ui/
+│               ├── manager/
+│               │   ├── product_cubit/
+│               │   │   ├── products_cubit.dart
+│               │   │   └── products_state.dart
+│               ├── view/
+│               └── widgets/
+│               │    ├── custom_error_widget.dart
+│               │   ├── loading_widget.dart
+│               │    ├── product_list_view.dart
+│               └── products_widget.dart    
 └──  main.dart
 
 

@@ -1,9 +1,9 @@
 import 'package:either_dart/src/either.dart';
-import 'package:task1_rout/core/errors/faliure.dart';
-import 'package:task1_rout/core/utilis/api_constance.dart';
-import 'package:task1_rout/fetures/products/data/models/product.dart';
-import 'package:task1_rout/fetures/products/data/repos/product_repo.dart';
-import 'package:task1_rout/fetures/products/data/services/api_service.dart';
+import 'package:elevate_task/core/errors/faliure.dart';
+import 'package:elevate_task/core/utilis/api_constance.dart';
+import 'package:elevate_task/fetures/products/data/models/product.dart';
+import 'package:elevate_task/fetures/products/data/repos/product_repo.dart';
+import 'package:elevate_task/fetures/products/data/services/api_service.dart';
 
 class ProductRepoimpl implements ProductRepo {
   final ApiService apiService;

@@ -3,10 +3,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task1_rout/fetures/products/data/repos/product_repo_impl.dart';
-import 'package:task1_rout/fetures/products/data/services/api_service.dart';
-import 'package:task1_rout/fetures/products/ui/manager/product_cubit/products_cubit.dart';
-import 'package:task1_rout/fetures/products/ui/view/products_widget.dart';
+import 'package:elevate_task/fetures/products/data/repos/product_repo_impl.dart';
+import 'package:elevate_task/fetures/products/data/services/api_service.dart';
+import 'package:elevate_task/fetures/products/ui/manager/product_cubit/products_cubit.dart';
+import 'package:elevate_task/fetures/products/ui/view/products_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utilis/service locator/service_locator.dart';

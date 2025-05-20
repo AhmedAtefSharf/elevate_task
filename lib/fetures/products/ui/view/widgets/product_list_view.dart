@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task1_rout/core/utilis/app_assets.dart';
-import 'package:task1_rout/fetures/products/ui/manager/product_cubit/products_cubit.dart';
-import 'package:task1_rout/fetures/products/ui/view/widgets/custom_error_widget.dart';
-import 'package:task1_rout/fetures/products/ui/view/widgets/loading_widget.dart';
+import 'package:elevate_task/core/utilis/app_assets.dart';
+import 'package:elevate_task/fetures/products/ui/manager/product_cubit/products_cubit.dart';
+import 'package:elevate_task/fetures/products/ui/view/widgets/custom_error_widget.dart';
+import 'package:elevate_task/fetures/products/ui/view/widgets/loading_widget.dart';
 import '../products_widget.dart';
 
 class ProductListView extends StatelessWidget {
@@ -65,12 +65,11 @@ class ProductListView extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 16,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: (191 / 245),
+                          crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
+                          childAspectRatio: 0.65,
                         ),
                         shrinkWrap: true,
                         itemCount: state.products.length,
