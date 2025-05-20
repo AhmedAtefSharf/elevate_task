@@ -30,7 +30,7 @@ class ProductWidget extends StatelessWidget {
                 Stack(
                   children: [
                     CachedNetworkImage(
-                      imageUrl: product.thumbnail, // Using thumbnail as the main image
+                      imageUrl: product.image??"", // Using thumbnail as the main image
                       placeholder: (context, url) => LoadingWidget(),
                       errorWidget: (context, url, error) =>  Icon(Icons.error),
                       width: double.infinity,

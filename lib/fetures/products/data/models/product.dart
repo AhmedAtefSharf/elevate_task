@@ -1,78 +1,64 @@
 import 'package:equatable/equatable.dart';
 
-class Product extends Equatable {
-  final int id;
-  final String title;
-  final String description;
-  final double price;
-  final double discountPercentage;
-  final double rating;
-  final int stock;
-  final String brand;
-  final String category;
-  final String thumbnail;
-  final List<String> images;
+class Product {
+  int? id;
+  String? title;
+  double? price;
+  String? description;
+  String? category;
+  String? image;
+  Rating? rating;
 
-  Product({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.discountPercentage,
-    required this.rating,
-    required this.stock,
-    required this.brand,
-    required this.category,
-    required this.thumbnail,
-    required this.images,
-  });
+  Product(
+      {this.id,
+        this.title,
+        this.price,
+        this.description,
+        this.category,
+        this.image,
+        this.rating});
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      price: json['price']?.toDouble() ?? 0.0,
-      discountPercentage: json['discountPercentage']?.toDouble() ?? 0.0,
-      rating: json['rating']?.toDouble() ?? 0.0,
-      stock: json['stock'] ?? 0,
-      brand: json['brand'] ?? '',
-      category: json['category'] ?? '',
-      thumbnail: json['thumbnail'] ?? '',
-      // Considered as the main image URL
-      images: List<String>.from(json['images'] ?? []),
-    );
+  Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    price = json['price'];
+    description = json['description'];
+    category = json['category'];
+    image = json['image'];
+    rating =
+    json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'price': price,
-      'discountPercentage': discountPercentage,
-      'rating': rating,
-      'stock': stock,
-      'brand': brand,
-      'category': category,
-      'thumbnail': thumbnail,
-      'images': images,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['price'] = this.price;
+    data['description'] = this.description;
+    data['category'] = this.category;
+    data['image'] = this.image;
+    if (this.rating != null) {
+      data['rating'] = this.rating!.toJson();
+    }
+    return data;
+  }
+}
+
+class Rating {
+  double? rate;
+  int? count;
+
+  Rating({this.rate, this.count});
+
+  Rating.fromJson(Map<String, dynamic> json) {
+    rate = json['rate'];
+    count = json['count'];
   }
 
-  @override
-  List<Object?> get props =>
-      [
-        id,
-        title,
-        description,
-        price,
-        discountPercentage,
-        rating,
-        stock,
-        brand,
-        category,
-        thumbnail,
-        images,
-      ];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['rate'] = this.rate;
+    data['count'] = this.count;
+    return data;
+  }
 }
